@@ -14,8 +14,8 @@ class ConverterServiceTest {
     @Test
     void shouldConvertDecimalToBinary() {
         //given
-        int providedDecimal = 765;
-        int expectedBinary = 1011111101;
+        int providedDecimal = 47;
+        int expectedBinary = 101111;
         //when
         int result = converterService.convertDecimalToBinary(providedDecimal);
         //then

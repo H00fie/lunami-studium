@@ -10,6 +10,6 @@ public class ConverterService {
             decimal /= 2;
             binaryResult.append(temporaryVariable);
         }
-        return Integer.parseInt(String.valueOf(binaryResult));
+        return Integer.parseInt(String.valueOf(binaryResult.reverse()));
     }
 }
