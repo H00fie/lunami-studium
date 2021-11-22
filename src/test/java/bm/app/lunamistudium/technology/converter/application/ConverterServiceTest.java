@@ -22,6 +22,17 @@ class ConverterServiceTest {
         assertThat(result).isEqualTo(expectedBinary);
     }
 
+    @Test
+    void shouldConvertBinaryToDecimal() {
+        //given
+        int providedBinary = 10001001;
+        int expectedDecimal = 137;
+        //when
+        int result = converterService.convertBinaryToDecimal(providedBinary);
+        //then
+        assertThat(result).isEqualTo(expectedDecimal);
+    }
+
     @BeforeEach
     void setUp() {
         converterService = new ConverterService();
