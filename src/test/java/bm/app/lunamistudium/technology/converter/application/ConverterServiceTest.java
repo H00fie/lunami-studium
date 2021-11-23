@@ -33,6 +33,28 @@ class ConverterServiceTest {
         assertThat(result).isEqualTo(expectedDecimal);
     }
 
+    @Test
+    void shouldConvertBinaryToHexadecimal() {
+        //given
+        String providedBinary = "11011101010";
+        String expectedHexadecimal = "6EA";
+        //when
+        String result = converterService.convertBinaryToHexadecimal(providedBinary);
+        //then
+        assertThat(result).isEqualTo(expectedHexadecimal);
+    }
+
+    @Test
+    void shouldConvertHexadecimalToBinary() {
+        //given
+        String providedHexadecimal = "B4F";
+        String expectedBinary = "101101001111";
+        //when
+        String result = converterService.convertHexadecimalToBinary(providedHexadecimal);
+        //then
+        assertThat(result).isEqualTo(expectedBinary);
+    }
+
     @BeforeEach
     void setUp() {
         converterService = new ConverterService();
