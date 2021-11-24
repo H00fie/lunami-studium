@@ -71,23 +71,23 @@ public class ConverterService {
         return binary;
     }
 
-    public String convertHexadecimalToBinary(String hexadecimal) {
-        hexadecimal = hexadecimal.replaceAll("0", "0000");
-        hexadecimal = hexadecimal.replaceAll("1", "0001");
-        hexadecimal = hexadecimal.replaceAll("2", "0010");
-        hexadecimal = hexadecimal.replaceAll("3", "0011");
-        hexadecimal = hexadecimal.replaceAll("4", "0100");
-        hexadecimal = hexadecimal.replaceAll("5", "0101");
-        hexadecimal = hexadecimal.replaceAll("6", "0110");
-        hexadecimal = hexadecimal.replaceAll("7", "0111");
-        hexadecimal = hexadecimal.replaceAll("8", "1000");
-        hexadecimal = hexadecimal.replaceAll("9", "1001");
-        hexadecimal = hexadecimal.replaceAll("A", "1010");
-        hexadecimal = hexadecimal.replaceAll("B", "1011");
-        hexadecimal = hexadecimal.replaceAll("C", "1100");
-        hexadecimal = hexadecimal.replaceAll("D", "1101");
-        hexadecimal = hexadecimal.replaceAll("E", "1110");
-        hexadecimal = hexadecimal.replaceAll("F", "1111");
-        return hexadecimal;
+    public String convertHexadecimalToBinary(String hex) {
+        hex = hex.replaceAll("0", "0000");
+        hex = hex.replaceAll("1", "0001");
+        hex = hex.replaceAll("2", "0010");
+        hex = hex.replaceAll("3", "0011");
+        hex = hex.replaceAll("4", "0100");
+        hex = hex.replaceAll("5", "0101");
+        hex = hex.replaceAll("6", "0110");
+        hex = hex.replaceAll("7", "0111");
+        hex = hex.replaceAll("8", "1000");
+        hex = hex.replaceAll("9", "1001");
+        hex = hex.replaceAll("A", "1010");
+        hex = hex.replaceAll("B", "1011");
+        hex = hex.replaceAll("C", "1100");
+        hex = hex.replaceAll("D", "1101");
+        hex = hex.replaceAll("E", "1110");
+        hex = hex.replaceAll("F", "1111");
+        return hex;
     }
 }
