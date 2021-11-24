@@ -1,13 +1,8 @@
 package bm.app.lunamistudium.technology.converter.application;
 
-import org.springframework.jdbc.core.SqlReturnType;
+import bm.app.lunamistudium.technology.converter.application.port.ConverterUseCase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class ConverterService {
+public class ConverterService implements ConverterUseCase {
 
     public int convertDecimalToBinary(int decimal) {
         StringBuffer binaryResult = new StringBuffer();
