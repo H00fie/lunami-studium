@@ -55,6 +55,17 @@ class ConverterServiceTest {
         assertThat(result).isEqualTo(expectedBinary);
     }
 
+    @Test
+    void shouldReturnFalseWhenIncorrectBinaryValue() {
+        //given
+        String providedBinary = "1001h0";
+        String expectedResult = "Incorrect binary value.";
+        //when
+        String actualResult = converterService.convertBinaryToHexadecimal(providedBinary);
+        //then
+        assertThat(actualResult).isEqualTo(expectedResult);
+    }
+
     @BeforeEach
     void setUp() {
         converterService = new ConverterService();

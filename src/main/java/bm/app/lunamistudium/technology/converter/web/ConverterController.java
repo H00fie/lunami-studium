@@ -12,13 +12,18 @@ public class ConverterController {
     private final ConverterUseCase converterUseCase;
 
     @GetMapping
-    public String landingGetPage() {
-        return "getPage.";
+    public String testGet() {
+        return "Hello there.";
     }
 
     @PostMapping("/decToBin/{decimal}")
     public int getDecimalToBinary(@PathVariable int decimal) {
         return converterUseCase.convertDecimalToBinary(decimal);
+    }
+
+    @PostMapping("/binToDec/{binary}")
+    public int getBinaryToDecimal(@PathVariable int binary) {
+        return converterUseCase.convertBinaryToDecimal(binary);
     }
 
 

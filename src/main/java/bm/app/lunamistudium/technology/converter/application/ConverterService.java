@@ -18,6 +18,9 @@ class ConverterService implements ConverterUseCase {
     }
 
     public int convertBinaryToDecimal(int binary) {
+        if (!checkIfCorrectBinary(String.valueOf(binary))) {
+            return -1;
+        }
         int decimal = 0;
         int n = 0;
         while (true) {
@@ -34,11 +37,17 @@ class ConverterService implements ConverterUseCase {
     }
 
     public String convertBinaryToHexadecimal(String binary) {
+        if (!checkIfCorrectBinary(binary)) {
+            return "Incorrect binary value.";
+        }
         binary = leftPad(binary);
         return binaryToHexadecimal(binary);
     }
 
     private String binaryToHexadecimal(String binary) {
+        if (!checkIfCorrectBinary(binary)) {
+            return "Incorrect binary value.";
+        }
         String[] hexValues = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
         String hexadecimal = "";
         int sum = 0;
@@ -66,6 +75,10 @@ class ConverterService implements ConverterUseCase {
             paddingCount--;
         }
         return binary;
+    }
+
+    private boolean checkIfCorrectBinary(String binary) {
+        return binary.matches("[0-1]+");
     }
 
     public String convertHexadecimalToBinary(String hex) {
