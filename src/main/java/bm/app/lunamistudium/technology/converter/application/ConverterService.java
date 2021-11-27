@@ -1,8 +1,10 @@
 package bm.app.lunamistudium.technology.converter.application;
 
 import bm.app.lunamistudium.technology.converter.application.port.ConverterUseCase;
+import org.springframework.stereotype.Service;
 
-public class ConverterService implements ConverterUseCase {
+@Service
+class ConverterService implements ConverterUseCase {
 
     public int convertDecimalToBinary(int decimal) {
         StringBuffer binaryResult = new StringBuffer();
