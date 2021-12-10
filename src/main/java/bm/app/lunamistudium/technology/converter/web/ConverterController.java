@@ -3,7 +3,12 @@ package bm.app.lunamistudium.technology.converter.web;
 import bm.app.lunamistudium.technology.converter.application.port.ConverterUseCase;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @RequestMapping("/api/converter")
 @RestController
@@ -19,13 +24,13 @@ public class ConverterController {
 
     @PostMapping("/decToBin/{decimal}")
     @ApiOperation(value = "Converts a decimal number into a binary one.", notes = "Provide a decimal number.")
-    public int getDecimalToBinary(@PathVariable int decimal) {
+    public String getDecimalToBinary(@PathVariable String decimal) {
         return converterUseCase.convertDecimalToBinary(decimal);
     }
 
     @PostMapping("/binToDec/{binary}")
     @ApiOperation(value = "Converts a binary number into a decimal one.", notes = "Provide a binary number.")
-    public int getBinaryToDecimal(@PathVariable int binary) {
+    public String getBinaryToDecimal(@PathVariable String binary) {
         return converterUseCase.convertBinaryToDecimal(binary);
     }
 

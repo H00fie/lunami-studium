@@ -1,39 +1,50 @@
 package bm.app.lunamistudium.technology.converter.application;
 
 import bm.app.lunamistudium.technology.converter.application.port.ConverterUseCase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.regex.Pattern;
 
 @Service
 class ConverterService implements ConverterUseCase {
 
-    public int convertDecimalToBinary(int decimal) {
+    Logger logger = LoggerFactory.getLogger(ConverterService.class);
+
+    public String convertDecimalToBinary(String decimal) {
+        if (!checkIfCorrectDecimal(decimal)) {
+            return "Incorrect decimal.";
+        }
         StringBuffer binaryResult = new StringBuffer();
+        int parsedInput = Integer.parseInt(decimal);
         int temporaryVariable;
-        while (decimal > 0) {
-            temporaryVariable = decimal % 2;
-            decimal /= 2;
+        while (parsedInput > 0) {
+            temporaryVariable = parsedInput % 2;
+            parsedInput /= 2;
             binaryResult.append(temporaryVariable);
         }
-        return Integer.parseInt(String.valueOf(binaryResult.reverse()));
+        return String.valueOf(binaryResult.reverse());
     }
 
-    public int convertBinaryToDecimal(int binary) {
+    public String convertBinaryToDecimal(String binary) {
         if (!checkIfCorrectBinary(String.valueOf(binary))) {
-            return -1;
+            return "Incorrect decimal.";
         }
+        int parsedInput = Integer.parseInt(binary);
         int decimal = 0;
         int n = 0;
         while (true) {
-            if (binary == 0) {
+            if (parsedInput == 0) {
                 break;
             } else {
-                int temp = binary % 10;
+                int temp = parsedInput % 10;
                 decimal += temp * Math.pow(2, n);
-                binary = binary / 10;
+                parsedInput = parsedInput / 10;
                 n++;
             }
         }
-        return decimal;
+        return String.valueOf(decimal);
     }
 
     public String convertBinaryToHexadecimal(String binary) {
@@ -77,10 +88,6 @@ class ConverterService implements ConverterUseCase {
         return binary;
     }
 
-    private boolean checkIfCorrectBinary(String binary) {
-        return binary.matches("[0-1]+");
-    }
-
     public String convertHexadecimalToBinary(String hex) {
         hex = hex.replaceAll("0", "0000");
         hex = hex.replaceAll("1", "0001");
@@ -99,5 +106,13 @@ class ConverterService implements ConverterUseCase {
         hex = hex.replaceAll("E", "1110");
         hex = hex.replaceAll("F", "1111");
         return hex;
+    }
+
+    private boolean checkIfCorrectBinary(String binary) {
+        return binary.matches("[0-1]+");
+    }
+
+    private boolean checkIfCorrectDecimal(String decimal) {
+        return decimal.matches("[0-9]+");
     }
 }

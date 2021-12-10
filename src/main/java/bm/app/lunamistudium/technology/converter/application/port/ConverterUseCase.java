@@ -2,9 +2,9 @@ package bm.app.lunamistudium.technology.converter.application.port;
 
 public interface ConverterUseCase {
 
-    int convertDecimalToBinary(int decimal);
+    String convertDecimalToBinary(String decimal);
 
-    int convertBinaryToDecimal(int binary);
+    String convertBinaryToDecimal(String binary);
 
     String convertBinaryToHexadecimal(String binary);
 

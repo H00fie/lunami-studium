@@ -14,10 +14,10 @@ class ConverterServiceTest {
     @Test
     void shouldConvertDecimalToBinary() {
         //given
-        int providedDecimal = 47;
-        int expectedBinary = 101111;
+        String providedDecimal = "47";
+        String expectedBinary = "101111";
         //when
-        int result = converterService.convertDecimalToBinary(providedDecimal);
+        String result = converterService.convertDecimalToBinary(providedDecimal);
         //then
         assertThat(result).isEqualTo(expectedBinary);
     }
@@ -25,10 +25,10 @@ class ConverterServiceTest {
     @Test
     void shouldConvertBinaryToDecimal() {
         //given
-        int providedBinary = 10001001;
-        int expectedDecimal = 137;
+        String providedBinary = "10001001";
+        String expectedDecimal = "137";
         //when
-        int result = converterService.convertBinaryToDecimal(providedBinary);
+        String result = converterService.convertBinaryToDecimal(providedBinary);
         //then
         assertThat(result).isEqualTo(expectedDecimal);
     }
