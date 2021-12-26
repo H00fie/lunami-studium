@@ -24,4 +24,9 @@ class TechshortsService implements TechshortsUseCase {
         Techshort techshort = command.toTechshort();
         return techshortsRepository.save(techshort);
     }
+
+    @Override
+    public void removeById(Long id) {
+        techshortsRepository.deleteById(id);
+    }
 }

@@ -35,6 +35,12 @@ public class TechshortsController {
         return ResponseEntity.created(uri).build();
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        techshortsUseCase.removeById(id);
+    }
+
     @Data
     private static class RestTechshortCommand {
         private String header;

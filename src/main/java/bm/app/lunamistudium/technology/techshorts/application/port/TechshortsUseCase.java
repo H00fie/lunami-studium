@@ -12,6 +12,8 @@ public interface TechshortsUseCase {
 
     Techshort addTechshort(CreateTechshortCommand command);
 
+    void removeById(Long id);
+
     @Value
     class CreateTechshortCommand {
         String header;

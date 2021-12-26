@@ -33,6 +33,11 @@ public class MemoryTechshortsRepository implements TechshortsRepository {
         return techshort;
     }
 
+    @Override
+    public void deleteById(Long id) {
+        storage.remove(id);
+    }
+
     private long nextId() {
         return ID_NEXT_VALUE.getAndIncrement();
     }

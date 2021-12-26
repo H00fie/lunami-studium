@@ -8,5 +8,7 @@ public interface TechshortsRepository {
 
     Techshort save(Techshort techshort);
 
+    void deleteById(Long id);
+
 
 }
