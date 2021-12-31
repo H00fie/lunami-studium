@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -36,6 +37,11 @@ public class MemoryTechshortsRepository implements TechshortsRepository {
     @Override
     public void deleteById(Long id) {
         storage.remove(id);
+    }
+
+    @Override
+    public Optional<Techshort> findById(Long id) {
+        return Optional.ofNullable(storage.get(id));
     }
 
     private long nextId() {

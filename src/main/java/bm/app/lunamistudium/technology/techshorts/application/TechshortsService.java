@@ -6,6 +6,7 @@ import bm.app.lunamistudium.technology.techshorts.domain.TechshortsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,5 +29,16 @@ class TechshortsService implements TechshortsUseCase {
     @Override
     public void removeById(Long id) {
         techshortsRepository.deleteById(id);
+    }
+
+    @Override
+    public UpdateTechshortResponse updateTechshort(UpdateTechshortCommand command) {
+        return techshortsRepository.findById(command.getId())
+                .map(techshort -> {
+                    Techshort updatedTechshort = command.updateFields(techshort);
+                    techshortsRepository.save(updatedTechshort);
+                    return UpdateTechshortResponse.SUCCESS;
+                })
+                .orElseGet(() -> new UpdateTechshortResponse(false, Collections.singletonList("Techshort not found with the id of: " + command.getId())));
     }
 }
