@@ -8,11 +8,14 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static bm.app.lunamistudium.technology.techshorts.application.port.TechshortsUseCase.*;
 
 @RequestMapping("/api/techshorts")
 @RestController
@@ -41,6 +44,16 @@ public class TechshortsController {
         techshortsUseCase.removeById(id);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateTechshort(@PathVariable Long id, @RequestBody RestTechshortCommand command) {
+        UpdateTechshortResponse response = techshortsUseCase.updateTechshort(command.toUpdateCommand(id));
+        if (!response.isSuccess()) {
+            String message = String.join(", ", response.getErrors());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, message);
+        }
+    }
+
     @Data
     private static class RestTechshortCommand {
         private String header;
@@ -50,6 +63,10 @@ public class TechshortsController {
 
         CreateTechshortCommand toCreateCommand() {
             return new CreateTechshortCommand(header, category, content, createdAt);
+        }
+
+        UpdateTechshortCommand toUpdateCommand(Long id) {
+            return new UpdateTechshortCommand(id, header, category, content, createdAt);
         }
     }
 
