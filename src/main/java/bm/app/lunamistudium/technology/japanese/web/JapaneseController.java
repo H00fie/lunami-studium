@@ -30,10 +30,16 @@ public class JapaneseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> addFlashcard(RestFlashCardCommand command) {
+    public ResponseEntity<Void> addFlashcard(@RequestBody RestFlashCardCommand command) {
         Flashcard flashcard = japaneseUseCase.addFlashcard(command.toCreateCommand());
         URI uri = createFlashcardUri(flashcard);
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        japaneseUseCase.removeById(id);
     }
 
     @Data
