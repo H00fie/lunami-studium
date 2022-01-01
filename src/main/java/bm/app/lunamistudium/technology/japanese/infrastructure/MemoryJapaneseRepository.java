@@ -23,12 +23,10 @@ public class MemoryJapaneseRepository implements JapaneseRepository {
 
     @Override
     public Flashcard save(Flashcard flashcard) {
-        if (flashcard.getId() != null) {
-            shelf.put(flashcard.getId(), flashcard);
-        } else {
+        if (flashcard.getId() == null) {
             flashcard.setId(createTheId());
-            shelf.put(flashcard.getId(), flashcard);
         }
+        shelf.put(flashcard.getId(), flashcard);
         return flashcard;
     }
 
