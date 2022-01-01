@@ -9,11 +9,14 @@ import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static bm.app.lunamistudium.technology.japanese.application.port.JapaneseUseCase.*;
 
 @RequestMapping("/api/flashcards")
 @RestController
@@ -42,6 +45,16 @@ public class JapaneseController {
         japaneseUseCase.removeById(id);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateFlashcard(@PathVariable Long id, @RequestBody RestFlashCardCommand command) {
+        UpdateFlashcardResponse response = japaneseUseCase.updateFlashcard(command.toUpdateCommand(id));
+        if (!response.isSuccess()) {
+            String message = String.join(", ", response.getErrors());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, message);
+        }
+    }
+
     @Data
     private static class RestFlashCardCommand {
         private String category;
@@ -51,6 +64,10 @@ public class JapaneseController {
 
         CreateFlashcardCommand toCreateCommand() {
             return new CreateFlashcardCommand(category, englishVersion, japaneseVersion, createdAt);
+        }
+
+        UpdateFlashcardCommand toUpdateCommand(Long id) {
+            return new UpdateFlashcardCommand(id, category, englishVersion, japaneseVersion, createdAt);
         }
     }
 

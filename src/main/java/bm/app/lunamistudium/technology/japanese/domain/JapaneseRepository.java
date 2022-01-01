@@ -1,6 +1,7 @@
 package bm.app.lunamistudium.technology.japanese.domain;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface JapaneseRepository {
 
@@ -9,4 +10,6 @@ public interface JapaneseRepository {
     Flashcard save(Flashcard flashcard);
 
     void deleteById(Long id);
+
+    Optional<Flashcard> findById(Long id);
 }

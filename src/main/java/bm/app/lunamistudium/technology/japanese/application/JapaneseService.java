@@ -6,6 +6,7 @@ import bm.app.lunamistudium.technology.japanese.domain.JapaneseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -27,5 +28,16 @@ class JapaneseService implements JapaneseUseCase {
     @Override
     public void removeById(Long id) {
         japaneseRepository.deleteById(id);
+    }
+
+    @Override
+    public UpdateFlashcardResponse updateFlashcard(UpdateFlashcardCommand command) {
+        return japaneseRepository.findById(command.getId())
+                .map(flashcard -> {
+                  Flashcard updatedFlashcard = command.updateFlashcard(flashcard);
+                  japaneseRepository.save(updatedFlashcard);
+                  return UpdateFlashcardResponse.SUCCESS;
+                })
+                .orElseGet(() -> new UpdateFlashcardResponse(false, Collections.singletonList("Flashcard with the id of: " + command.getId() + " not found.")));
     }
 }

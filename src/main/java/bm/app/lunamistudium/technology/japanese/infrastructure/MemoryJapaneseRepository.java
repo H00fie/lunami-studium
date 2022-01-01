@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -33,6 +34,11 @@ public class MemoryJapaneseRepository implements JapaneseRepository {
     @Override
     public void deleteById(Long id) {
         shelf.remove(id);
+    }
+
+    @Override
+    public Optional<Flashcard> findById(Long id) {
+        return Optional.ofNullable(shelf.get(id));
     }
 
     private long createTheId() {
