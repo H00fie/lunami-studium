@@ -2,6 +2,7 @@ package bm.app.lunamistudium.technology.japanese.infrastructure;
 
 import bm.app.lunamistudium.technology.japanese.domain.Flashcard;
 import bm.app.lunamistudium.technology.japanese.domain.JapaneseRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class MemoryJapaneseRepository implements JapaneseRepository {
 
     private final Map<Long, Flashcard> shelf = new ConcurrentHashMap<>();
